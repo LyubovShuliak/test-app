@@ -41,13 +41,11 @@ export class SectionComponent implements OnChanges {
       );
       return;
     }
+    // \u0430-\u04ff - matching cyrillic letters
     const letters = password.match(/[a-z\u0430-\u04ff]/gim);
     const digits = password.match(/\d/gm);
     const symbols = password.match(/[^a-z\d\u0430-\u04ff]/gim);
 
-    console.log('symbols', symbols);
-    console.log('digits', digits);
-    console.log('letters', letters);
     const easy =
       letters?.length === password.length ||
       digits?.length === password.length ||
