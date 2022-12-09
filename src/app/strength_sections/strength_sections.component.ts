@@ -15,7 +15,7 @@ export class SectionComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     const password = changes['password'].currentValue;
-    this.getStrength(password);
+    this.handleStrengthChange(password);
   }
 
   handlePasswordChange(strength: SectionsColors) {
@@ -25,7 +25,7 @@ export class SectionComponent implements OnChanges {
     }
   }
 
-  getStrength(password: string) {
+  handleStrengthChange(password: string) {
     if (!password) {
       this.handlePasswordChange(PASSWORD_STRENGTH.EMPTY.classes);
       return;
