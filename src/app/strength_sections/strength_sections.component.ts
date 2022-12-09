@@ -28,12 +28,12 @@ export class SectionComponent implements OnChanges {
   handleStrengthChange(password: string) {
     if (!password.length) {
       this.handlePasswordChange(PASSWORD_STRENGTH.EMPTY.classes);
-      this.strength = PASSWORD_STRENGTH.EMPTY.strength;
+      this.strength = PASSWORD_STRENGTH.EMPTY.name;
       return;
     }
     if (password && password?.length < 8) {
       this.handlePasswordChange(PASSWORD_STRENGTH.SHORT.classes);
-      this.strength = PASSWORD_STRENGTH.SHORT.strength;
+      this.strength = PASSWORD_STRENGTH.SHORT.name;
       return;
     }
     const letters = password.match(/[a-zA-Z]/gm);
@@ -45,17 +45,17 @@ export class SectionComponent implements OnChanges {
       symbols?.length === password.length
     ) {
       this.handlePasswordChange(PASSWORD_STRENGTH.EASY.classes);
-      this.strength = PASSWORD_STRENGTH.EASY.strength;
+      this.strength = PASSWORD_STRENGTH.EASY.name;
       return;
     }
     if (letters && digits && symbols) {
       this.handlePasswordChange(PASSWORD_STRENGTH.STRONG.classes);
-      this.strength = PASSWORD_STRENGTH.STRONG.strength;
+      this.strength = PASSWORD_STRENGTH.STRONG.name;
       return;
     }
     if ((letters && digits) || (digits && symbols) || (letters && symbols)) {
       this.handlePasswordChange(PASSWORD_STRENGTH.MEDIUM.classes);
-      this.strength = PASSWORD_STRENGTH.MEDIUM.strength;
+      this.strength = PASSWORD_STRENGTH.MEDIUM.name;
       return;
     }
   }
