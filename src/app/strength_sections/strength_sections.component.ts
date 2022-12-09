@@ -45,24 +45,25 @@ export class SectionComponent implements OnChanges {
       digits?.length === password.length ||
       symbols?.length === password.length;
 
-    const medium =
-      (letters && digits) || (digits && symbols) || (letters && symbols);
-
     const strong = letters && digits && symbols;
+
+    const medium =
+      ((letters && digits) || (digits && symbols) || (letters && symbols)) &&
+      !strong;
 
     if (easy) {
       this.handlePasswordChange(PASSWORD_STRENGTH.EASY.classes);
       this.strength = PASSWORD_STRENGTH.EASY.name;
       return;
     }
-    if (strong) {
-      this.handlePasswordChange(PASSWORD_STRENGTH.STRONG.classes);
-      this.strength = PASSWORD_STRENGTH.STRONG.name;
-      return;
-    }
     if (medium) {
       this.handlePasswordChange(PASSWORD_STRENGTH.MEDIUM.classes);
       this.strength = PASSWORD_STRENGTH.MEDIUM.name;
+      return;
+    }
+    if (strong) {
+      this.handlePasswordChange(PASSWORD_STRENGTH.STRONG.classes);
+      this.strength = PASSWORD_STRENGTH.STRONG.name;
       return;
     }
   }
