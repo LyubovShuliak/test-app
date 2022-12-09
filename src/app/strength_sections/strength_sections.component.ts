@@ -18,10 +18,10 @@ export class SectionComponent implements OnChanges {
     this.handleStrengthChange(password);
   }
 
-  handlePasswordChange(classes: SectionsColors) {
+  handlePasswordChange(colorClasses: SectionsColors) {
     for (const key in this.colors) {
       this.colors[key as keyof SectionsColors] =
-        classes[key as keyof SectionsColors];
+        colorClasses[key as keyof SectionsColors];
     }
   }
 
@@ -39,22 +39,28 @@ export class SectionComponent implements OnChanges {
     const letters = password.match(/[a-zA-Z]/gm);
     const digits = password.match(/\d/gm);
     const symbols = password.match(/[\W_]/gm);
+
     const easy =
       letters?.length === password.length ||
       digits?.length === password.length ||
       symbols?.length === password.length;
-    const medium = letters && digits && symbols;
+
+    const medium =
+      (letters && digits) || (digits && symbols) || (letters && symbols);
+
+    const strong = letters && digits && symbols;
+
     if (easy) {
       this.handlePasswordChange(PASSWORD_STRENGTH.EASY.classes);
       this.strength = PASSWORD_STRENGTH.EASY.name;
       return;
     }
-    if (medium) {
+    if (strong) {
       this.handlePasswordChange(PASSWORD_STRENGTH.STRONG.classes);
       this.strength = PASSWORD_STRENGTH.STRONG.name;
       return;
     }
-    if ((letters && digits) || (digits && symbols) || (letters && symbols)) {
+    if (medium) {
       this.handlePasswordChange(PASSWORD_STRENGTH.MEDIUM.classes);
       this.strength = PASSWORD_STRENGTH.MEDIUM.name;
       return;
