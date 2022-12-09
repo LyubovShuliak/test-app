@@ -1,8 +1,23 @@
 export const PASSWORD_STRENGTH = {
-  EMPTY: { first: 'grey', second: 'grey', third: 'grey' },
-  EASY: { first: 'red', second: 'grey', third: 'grey' },
+  EMPTY: {
+    classes: { first: 'empty', second: 'empty', third: 'empty' },
+    strength: 'empty',
+  },
+  EASY: {
+    classes: { first: 'easy', second: 'easy', third: 'empty' },
+    strength: 'easy',
+  },
 
-  SHORT: { first: 'red', second: 'red', third: 'red' },
-  MEDIUM: { first: 'yellow', second: 'yellow', third: 'green' },
-  STRONG: { first: 'green', second: 'green', third: 'green' },
+  SHORT: {
+    classes: { first: 'easy', second: 'easy', third: 'easy' },
+    strength: 'short',
+  },
+  MEDIUM: {
+    classes: { first: 'medium', second: 'medium', third: 'strong' },
+    strength: 'medium',
+  },
+  STRONG: {
+    classes: { first: 'strong', second: 'strong', third: 'strong' },
+    strength: 'strong',
+  },
 };

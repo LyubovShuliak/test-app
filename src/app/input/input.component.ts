@@ -15,10 +15,10 @@ import {
 })
 export class InputComponent implements OnInit {
   @Output() onEnterPassword = new EventEmitter<string>();
-  constructor() {}
+  inputValue = '';
   ngOnInit(): void {}
   enterPassword(passwordInput: HTMLInputElement) {
     this.onEnterPassword.emit(passwordInput.value);
-    console.log(passwordInput.value);
+    this.inputValue = passwordInput.value;
   }
 }

@@ -11,6 +11,12 @@ export class SectionComponent implements OnChanges {
   @Input() password: string = '';
 
   colors: SectionsColors = { first: '', second: '', third: '' };
+  strength = 'empty';
+
+  ngOnChanges(changes: SimpleChanges) {
+    const password = changes['password'].currentValue;
+    this.getStrength(password);
+  }
 
   handlePasswordChange(strength: SectionsColors) {
     for (const key in this.colors) {
@@ -19,14 +25,14 @@ export class SectionComponent implements OnChanges {
     }
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    const password = changes['password'].currentValue;
+  getStrength(password: string) {
     if (!password) {
-      this.handlePasswordChange(PASSWORD_STRENGTH.EMPTY);
+      this.handlePasswordChange(PASSWORD_STRENGTH.EMPTY.classes);
       return;
     }
     if (password && password?.length < 8) {
-      this.handlePasswordChange(PASSWORD_STRENGTH.SHORT);
+      this.handlePasswordChange(PASSWORD_STRENGTH.SHORT.classes);
+      this.strength = PASSWORD_STRENGTH.SHORT.strength;
       return;
     }
     const letters = password.match(/[a-zA-Z]/gm);
@@ -37,17 +43,18 @@ export class SectionComponent implements OnChanges {
       digits?.length === password.length ||
       symbols?.length === password.length
     ) {
-      this.handlePasswordChange(PASSWORD_STRENGTH.EASY);
+      this.handlePasswordChange(PASSWORD_STRENGTH.EASY.classes);
+      this.strength = PASSWORD_STRENGTH.EASY.strength;
       return;
-    } else if (letters && digits && symbols) {
-      this.handlePasswordChange(PASSWORD_STRENGTH.STRONG);
+    }
+    if (letters && digits && symbols) {
+      this.handlePasswordChange(PASSWORD_STRENGTH.STRONG.classes);
+      this.strength = PASSWORD_STRENGTH.STRONG.strength;
       return;
-    } else if (
-      (letters && digits) ||
-      (digits && symbols) ||
-      (letters && symbols)
-    ) {
-      this.handlePasswordChange(PASSWORD_STRENGTH.MEDIUM);
+    }
+    if ((letters && digits) || (digits && symbols) || (letters && symbols)) {
+      this.handlePasswordChange(PASSWORD_STRENGTH.MEDIUM.classes);
+      this.strength = PASSWORD_STRENGTH.MEDIUM.strength;
       return;
     }
   }
@@ -55,9 +62,11 @@ export class SectionComponent implements OnChanges {
   getFirstSectionColor() {
     return this.colors.first;
   }
+
   getSecondSectionColor() {
     return this.colors.second;
   }
+
   getThirdSectionColor() {
     return this.colors.third;
   }
