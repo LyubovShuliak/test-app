@@ -1,7 +1,24 @@
-<input
-  type="password"
-  #passwordInput
-  (input)="enterPassword(passwordInput)"
-  [value]="inputValue"
-  autocomplete="current-password"
-/>
+<div class="input_container">
+  <input
+    [type]="!showPassword ? 'password' : 'text'"
+    #passwordInput
+    (input)="enterPassword(passwordInput)"
+    [value]="inputValue"
+    autocomplete="current-password"
+    class="input"
+  />
+  <button (click)="handlePasswordVisibility()" class="eye_button">
+    <img
+      src="../../assets/show.png"
+      alt=""
+      class="eye"
+      [ngStyle]="{ display: showPassword ? 'none' : 'block' }"
+    />
+    <img
+      src="../../assets/hide.png"
+      alt=""
+      class="eye"
+      [ngStyle]="{ display: !showPassword ? 'none' : 'block' }"
+    />
+  </button>
+</div>

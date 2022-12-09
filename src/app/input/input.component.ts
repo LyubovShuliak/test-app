@@ -16,9 +16,15 @@ import {
 export class InputComponent implements OnInit {
   @Output() onEnterPassword = new EventEmitter<string>();
   inputValue = '';
+  showPassword = false;
+
   ngOnInit(): void {}
   enterPassword(passwordInput: HTMLInputElement) {
     this.onEnterPassword.emit(passwordInput.value);
     this.inputValue = passwordInput.value;
+  }
+
+  handlePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 }

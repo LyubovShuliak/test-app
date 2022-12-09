@@ -15,16 +15,21 @@
   display: block;
   padding: 0;
   margin: 0;
+  width: 50px;
 }
 .empty {
   background-color: grey;
+  transition: 0.6s;
 }
 .easy {
   background-color: red;
+  transition: 0.6s;
 }
 .strong {
   background-color: green;
+  transition: 0.6s;
 }
 .medium {
   background-color: yellow;
+  transition: 0.6s;
 }

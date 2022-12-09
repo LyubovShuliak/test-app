@@ -26,8 +26,9 @@ export class SectionComponent implements OnChanges {
   }
 
   handleStrengthChange(password: string) {
-    if (!password) {
+    if (!password.length) {
       this.handlePasswordChange(PASSWORD_STRENGTH.EMPTY.classes);
+      this.strength = PASSWORD_STRENGTH.EMPTY.strength;
       return;
     }
     if (password && password?.length < 8) {
