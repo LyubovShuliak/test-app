@@ -38,11 +38,9 @@ export class SectionComponent implements OnChanges {
       symbols?.length === password.length
     ) {
       this.handlePasswordChange(PASSWORD_STRENGTH.EASY);
-
       return;
     } else if (letters && digits && symbols) {
       this.handlePasswordChange(PASSWORD_STRENGTH.STRONG);
-
       return;
     } else if (
       (letters && digits) ||

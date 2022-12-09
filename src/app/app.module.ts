@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { InputComponent } from './input/input.component';
-import { SectionComponent } from './section/section.component';
+import { SectionComponent } from './strength_sections/strength_sections.component';
 import { PasswordInputContainerComponent } from './password-input-container/password-input-container.component';
 
 @NgModule({
@@ -11,12 +11,10 @@ import { PasswordInputContainerComponent } from './password-input-container/pass
     AppComponent,
     InputComponent,
     SectionComponent,
-    PasswordInputContainerComponent
+    PasswordInputContainerComponent,
   ],
-  imports: [
-    BrowserModule
-  ],
+  imports: [BrowserModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
