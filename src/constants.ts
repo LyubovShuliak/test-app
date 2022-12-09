@@ -10,7 +10,7 @@ export const PASSWORD_STRENGTH = {
 
   SHORT: {
     classes: { first: 'easy', second: 'easy', third: 'easy' },
-    strength: 'short',
+    strength: 'too short',
   },
   MEDIUM: {
     classes: { first: 'medium', second: 'medium', third: 'strong' },
