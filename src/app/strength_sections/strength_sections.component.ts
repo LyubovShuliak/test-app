@@ -18,27 +18,32 @@ export class SectionComponent implements OnChanges {
     this.handleStrengthChange(password);
   }
 
-  handlePasswordChange(colorClasses: SectionsColors) {
+  handlePasswordChange(colorClasses: SectionsColors, strengthName: string) {
     for (const key in this.colors) {
       this.colors[key as keyof SectionsColors] =
         colorClasses[key as keyof SectionsColors];
     }
+    this.strength = strengthName;
   }
 
   handleStrengthChange(password: string) {
     if (!password.length) {
-      this.handlePasswordChange(PASSWORD_STRENGTH.EMPTY.classes);
-      this.strength = PASSWORD_STRENGTH.EMPTY.name;
+      this.handlePasswordChange(
+        PASSWORD_STRENGTH.EMPTY.classes,
+        PASSWORD_STRENGTH.EMPTY.name
+      );
       return;
     }
     if (password && password?.length < 8) {
-      this.handlePasswordChange(PASSWORD_STRENGTH.SHORT.classes);
-      this.strength = PASSWORD_STRENGTH.SHORT.name;
+      this.handlePasswordChange(
+        PASSWORD_STRENGTH.SHORT.classes,
+        PASSWORD_STRENGTH.SHORT.name
+      );
       return;
     }
-    const letters = password.match(/[a-zA-Z]/gm);
+    const letters = password.match(/[a-z\u0430-\u044f]/gim);
     const digits = password.match(/\d/gm);
-    const symbols = password.match(/[\W_]/gm);
+    const symbols = password.match(/[^a-z\d\u0430-\u044f]/gim);
 
     const easy =
       letters?.length === password.length ||
@@ -52,18 +57,24 @@ export class SectionComponent implements OnChanges {
       !strong;
 
     if (easy) {
-      this.handlePasswordChange(PASSWORD_STRENGTH.EASY.classes);
-      this.strength = PASSWORD_STRENGTH.EASY.name;
+      this.handlePasswordChange(
+        PASSWORD_STRENGTH.EASY.classes,
+        PASSWORD_STRENGTH.EASY.name
+      );
       return;
     }
     if (medium) {
-      this.handlePasswordChange(PASSWORD_STRENGTH.MEDIUM.classes);
-      this.strength = PASSWORD_STRENGTH.MEDIUM.name;
+      this.handlePasswordChange(
+        PASSWORD_STRENGTH.MEDIUM.classes,
+        PASSWORD_STRENGTH.MEDIUM.name
+      );
       return;
     }
     if (strong) {
-      this.handlePasswordChange(PASSWORD_STRENGTH.STRONG.classes);
-      this.strength = PASSWORD_STRENGTH.STRONG.name;
+      this.handlePasswordChange(
+        PASSWORD_STRENGTH.STRONG.classes,
+        PASSWORD_STRENGTH.STRONG.name
+      );
       return;
     }
   }
