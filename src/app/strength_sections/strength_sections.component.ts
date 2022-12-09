@@ -41,10 +41,13 @@ export class SectionComponent implements OnChanges {
       );
       return;
     }
-    const letters = password.match(/[a-z\u0430-\u044f]/gim);
+    const letters = password.match(/[a-z\u0430-\u04ff]/gim);
     const digits = password.match(/\d/gm);
-    const symbols = password.match(/[^a-z\d\u0430-\u044f]/gim);
+    const symbols = password.match(/[^a-z\d\u0430-\u04ff]/gim);
 
+    console.log('symbols', symbols);
+    console.log('digits', digits);
+    console.log('letters', letters);
     const easy =
       letters?.length === password.length ||
       digits?.length === password.length ||
@@ -53,8 +56,7 @@ export class SectionComponent implements OnChanges {
     const strong = letters && digits && symbols;
 
     const medium =
-      ((letters && digits) || (digits && symbols) || (letters && symbols)) &&
-      !strong;
+      (letters && digits) || (digits && symbols) || (letters && symbols);
 
     if (easy) {
       this.handlePasswordChange(
@@ -63,17 +65,17 @@ export class SectionComponent implements OnChanges {
       );
       return;
     }
-    if (medium) {
-      this.handlePasswordChange(
-        PASSWORD_STRENGTH.MEDIUM.classes,
-        PASSWORD_STRENGTH.MEDIUM.name
-      );
-      return;
-    }
     if (strong) {
       this.handlePasswordChange(
         PASSWORD_STRENGTH.STRONG.classes,
         PASSWORD_STRENGTH.STRONG.name
+      );
+      return;
+    }
+    if (medium) {
+      this.handlePasswordChange(
+        PASSWORD_STRENGTH.MEDIUM.classes,
+        PASSWORD_STRENGTH.MEDIUM.name
       );
       return;
     }
